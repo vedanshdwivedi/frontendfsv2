@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleNavigate = (urlPath) => {
     navigate(urlPath);
@@ -15,19 +17,37 @@ const Login = () => {
         <h1 className="loginTitle">Please enter your login and password!</h1>
         <div className="loginForm">
           <div className="loginFormItem">
-            <input type="text" placeholder="Email" />
+            <input
+              type="text"
+              placeholder="Email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
           </div>
           <div className="loginFormItem">
-            <input type="password" placeholder="Password" />
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
           </div>
           <div className="forgotPasswordContainer">
             <h3 className="forgotPassword">Forgot Password?</h3>
           </div>
           <div className="loginButtonWrapper">
             <button
-              className="loginButton"
+              className={
+                email !== "" && password !== ""
+                  ? "loginButton"
+                  : "loginButton disabledButton"
+              }
               onClick={() => {
-                handleNavigate("/");
+                if (email !== "" && password !== "") {
+                  handleNavigate("/");
+                }
               }}
             >
               Login
@@ -52,7 +72,7 @@ const Login = () => {
               handleNavigate("/signup");
             }}
           >
-            Sign Up
+            Sign Up to create new account
           </div>
         </div>
       </div>
