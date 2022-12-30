@@ -1,0 +1,86 @@
+.SignupContainer {
+  display: flex;
+  justify-content: center;
+  background-color: #6a11cb;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to right,
+    rgba(106, 17, 203, 1),
+    rgba(37, 117, 252, 1)
+  );
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(
+    to right,
+    rgba(106, 17, 203, 1),
+    rgba(37, 117, 252, 1)
+  );
+}
+
+.signupWrapper {
+  width: 100%;
+  max-width: 450px;
+  height: max-content;
+  margin: 110px 0px;
+  background-color: #332d2d;
+  padding: 20px 20px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  border-radius: 20px;
+}
+
+.signupTitle {
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 70px;
+  color: #9a9696;
+  margin-bottom: 30px;
+}
+
+.signupFormItem > input {
+  width: 300px;
+  outline: 1px solid white;
+  border: none;
+  border-radius: 2px;
+  margin: 10px 0px;
+  padding: 10px !important;
+  background-color: #332d2d;
+  color: white;
+  cursor: pointer;
+}
+
+.signupButtonWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.signupButton {
+  padding: 15px 25px;
+  margin: 20px 0px;
+  background-color: #332d2d;
+  border: 1px solid white;
+  color: white;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.loginButtonWrapper {
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+  margin-top: 20px !important;
+  border: none;
+}
+
+.loginButtonNavigator {
+  align-items: flex-end;
+  margin-bottom: 40px !important;
+}
+
+.disabledButton {
+  cursor: not-allowed;
+}
