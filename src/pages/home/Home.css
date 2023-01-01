@@ -1,0 +1,13 @@
+.HomeWrapper {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: flex;
+}
+
+.Projects {
+  width: 100%;
+  max-width: 1024px;
+  justify-content: center;
+  padding: 20px;
+}

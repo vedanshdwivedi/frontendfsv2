@@ -1,0 +1,57 @@
+.ProjectListItem {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #3f5de1;
+  border-radius: 5px;
+  margin: 10px;
+  display: flex;
+}
+
+.ProjectListItemWrapper {
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  gap: 30px;
+}
+
+.rightProjectListItems {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #3f5de1;
+  border-radius: 5px;
+}
+
+.leftProjectListItems {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #3f5de1;
+  border-radius: 5px;
+}
+
+.rightProjectListItem {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.ProjectLabel {
+  display: flex;
+  gap: 5px;
+}
+
+.ProjectLabel > i {
+  color: red;
+}
+
+.ProjectLabel > label {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.ProjectValue {
+  font-size: 16px;
+  font-weight: lighter;
+}

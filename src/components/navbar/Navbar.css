@@ -24,11 +24,14 @@
 
 .navbarItems {
   display: flex;
+  gap: 30px;
   justify-content: space-between;
 }
 
 .navbarItem {
   display: flex;
+  color: white;
+  gap: 5px;
 }
 
 .logout {
@@ -49,4 +52,13 @@
 .logoutButton:hover {
   font-weight: 500;
   font-size: 16px;
+}
+
+.createNavbarProjectButton {
+  border: none;
+  background-color: #3f5de1;
+  color: white;
+  font-weight: 400;
+  font-size: 12px;
+  cursor: pointer;
 }

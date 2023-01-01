@@ -1,0 +1,83 @@
+.CreateProject {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px !important;
+  padding: 20px;
+}
+
+.CreateProjectWrapper {
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.createProjectTitle {
+  font-weight: 500;
+  font-size: 40px;
+  margin-bottom: 20px !important;
+}
+
+.CreateProjectForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.CreateProjectFormItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.CreateProjectFormItem > input {
+  width: 300px;
+  outline: 1px solid white;
+  border-radius: 5px;
+  padding: 10px !important;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.CreateProjectFormItem > textarea {
+  resize: none;
+  padding: 10px !important;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.CreateProjectFormItemLabel > i {
+  padding: 10px !important;
+  font-size: 24px;
+  color: #3f5de1;
+}
+
+.CreateProjectFormItemLabel > label {
+  padding: 10px !important;
+  font-size: 24px;
+}
+
+.CreateProjectSubmitButton {
+  justify-content: center;
+  margin-top: 40px !important;
+}
+
+.CreateProjectFormButton {
+  justify-content: center;
+  padding: 10px !important;
+  font-size: 20px;
+  background-color: #3f5de1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.CreateProjectFormButton:hover {
+  color: #3f5de1;
+  background-color: white;
+  border: 1px solid #3f5de1;
+}

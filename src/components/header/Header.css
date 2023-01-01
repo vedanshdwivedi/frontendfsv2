@@ -1,0 +1,46 @@
+.HeaderContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #3f5de1;
+  color: white;
+}
+
+.HeaderWrapper {
+  width: 100%;
+  max-width: 1024px;
+  padding: 15px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.headerTitle {
+  font-weight: 500;
+  font-size: 48px;
+}
+
+.headerSubtitle {
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.headerSubtitle > b {
+  font-weight: bold;
+  font-size: 30px;
+  color: whitesmoke;
+}
+
+.createProjectButton {
+  padding: 10px 15px !important;
+  border: 1px solid white;
+  max-width: max-content;
+  background-color: #3f5de1;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
