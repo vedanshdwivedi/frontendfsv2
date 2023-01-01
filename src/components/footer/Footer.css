@@ -1,0 +1,32 @@
+.Footer {
+  width: 100%;
+  background-color: #3f5de1;
+  color: white;
+  justify-content: center;
+  display: flex;
+  margin-top: 20px;
+}
+
+.FooterWrapper {
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px;
+}
+
+.footerTitle {
+  padding: 10px;
+  font-size: 18px;
+}
+
+.footerTitle > i {
+  color: red;
+  font-size: 20px;
+}
+
+.footerTitle > i:hover {
+    color: rgb(171, 13, 13);
+    cursor: pointer;
+  }
