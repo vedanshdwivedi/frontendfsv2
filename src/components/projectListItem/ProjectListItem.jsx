@@ -15,6 +15,13 @@ const ProjectListItem = () => {
           </div>
           <div className="rightProjectListItem">
             <div className="ProjectLabel">
+              <i className="fa-solid fa-list-ol"></i>
+              <label>Status</label>
+            </div>
+            <div className="ProjectValue">CREATED</div>
+          </div>
+          <div className="rightProjectListItem">
+            <div className="ProjectLabel">
               <i className="fa-regular fa-at"></i>
               <label>Notification Email</label>
             </div>
@@ -32,24 +39,52 @@ const ProjectListItem = () => {
               <i className="fa-solid fa-clock"></i>
               <label>Created Date</label>
             </div>
-            <div className="ProjectValue">XG Boost Regressor</div>
+            <div className="ProjectValue">27 January 2023, 12:04 PM UTC</div>
           </div>
           <div className="rightProjectListItem">
             <div className="ProjectLabel">
               <i className="fa-solid fa-pen"></i>
               <label>Last Updated</label>
             </div>
-            <div className="ProjectValue">XG Boost Regressor</div>
+            <div className="ProjectValue">27 January 2023, 12:04 PM UTC</div>
           </div>
-          <div className="rightProjectListItem">
-            <div className="ProjectLabel">
+          <div className="ProjectListItemControl">
+            <div className="ProjectListItemControlElement">
+              <button className="actionButton">Open Project</button>
+            </div>
+            <div className="ProjectListItemControlElement">
+              <button className="actionButton">Delete Project</button>
+            </div>
+          </div>
+        </div>
+        <div className="leftProjectListItems">
+          <div className="leftProjectListItem">
+            <div className="DescriptionTitle ProjectLabel">
               <i className="fa-regular fa-file"></i>
               <label>Description</label>
             </div>
-            <div className="ProjectValue">XG Boost Regressor</div>
+            <div className="DescriptionText ProjectValue">
+              <p align="justify">
+                This is some random text to simulate the behaviour of the a long
+                passage to occupy the area for the project description. The left
+                sidebar is only supposed to have the project description. I need
+                to figure out how can I add that read more implementation. I am
+                adding more gibberish texts in order to occupy more area on the
+                frontend.This is some random text to simulate the behaviour of
+                the a long passage to occupy the area for the project
+                description. The left sidebar is only supposed to have the
+                project description. I need to figure out how can I add that
+                read more implementation. I am adding more gibberish texts in
+                order to occupy more area on the frontend. This is some random
+                text to simulate the behaviour of the a long passage to occupy
+                the area for the project description. The left sidebar is only
+                supposed to have the project description. I need to figure out
+                how can I add that read more implementation. I am adding more
+                gibberish texts in order to occupy more area on the frontend.
+              </p>
+            </div>
           </div>
         </div>
-        <div className="leftProjectListItems">Left</div>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@
   border-radius: 5px;
   margin: 10px;
   display: flex;
+  max-height: 300px;
 }
 
 .ProjectListItemWrapper {
@@ -18,16 +19,14 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  border: 1px solid #3f5de1;
-  border-radius: 5px;
+  /* border: 1px solid #3f5de1;
+  border-radius: 5px; */
 }
 
 .leftProjectListItems {
   flex: 1;
   display: flex;
   flex-direction: column;
-  border: 1px solid #3f5de1;
-  border-radius: 5px;
 }
 
 .rightProjectListItem {
@@ -54,4 +53,39 @@
 .ProjectValue {
   font-size: 16px;
   font-weight: lighter;
+}
+
+.DescriptionText{
+  margin: 20px 0px;
+  max-height: 220px;
+  overflow-y: scroll;
+  margin-right: 10px;
+}
+
+.ProjectListItemControl{
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid #ffffff06;
+  border-radius: 5px;
+}
+
+
+.ProjectListItemControlElement{
+  margin: 5px;
+  padding: 5px;
+}
+
+.actionButton{
+  height: 35px;
+  padding: 5px 15px;
+  border: 1px solid #3f5de1;
+  border-radius: 7px;
+  background-color: white;
+  color: #3f5de1;
+}
+
+.actionButton:hover{
+  color: white;
+  background-color: #3f5de1;
+  cursor: pointer;
 }

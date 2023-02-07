@@ -1,4 +1,11 @@
 
+### Setting up locally
+
+Run the following commands
+
+npm i
+npm start
+
 ### Screenshots
 
 Login Page
