@@ -1,7 +1,20 @@
 import "./ProjectListItem.css";
-import React from "react";
+import { React } from "react";
+import { useNavigate } from "react-router-dom";
 
-const ProjectListItem = () => {
+const ProjectListItem = (prop) => {
+  const navigate = useNavigate();
+  const projectId = prop.projectId;
+  const role = prop.role;
+
+  const deleteProject = async () => {
+    console.log("Deleting Project");
+  };
+
+  const openProject = () => {
+    navigate("/project", { state: { id: projectId, role: role } });
+  };
+
   return (
     <div className="ProjectListItem">
       <div className="ProjectListItemWrapper">
@@ -50,10 +63,24 @@ const ProjectListItem = () => {
           </div>
           <div className="ProjectListItemControl">
             <div className="ProjectListItemControlElement">
-              <button className="actionButton">Open Project</button>
+              <button
+                className="actionButton"
+                onClick={() => {
+                  openProject();
+                }}
+              >
+                Open Project
+              </button>
             </div>
             <div className="ProjectListItemControlElement">
-              <button className="actionButton">Delete Project</button>
+              <button
+                className="actionButton"
+                onClick={() => {
+                  deleteProject();
+                }}
+              >
+                Delete Project
+              </button>
             </div>
           </div>
         </div>

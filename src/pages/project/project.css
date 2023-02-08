@@ -1,0 +1,7 @@
+.projectContainer{
+    min-height: 500px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+}

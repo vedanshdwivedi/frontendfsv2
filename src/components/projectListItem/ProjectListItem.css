@@ -89,3 +89,7 @@
   background-color: #3f5de1;
   cursor: pointer;
 }
+
+.leftProjectListItem{
+  margin-top: 10px;
+}

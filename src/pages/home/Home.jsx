@@ -13,9 +13,9 @@ const Home = () => {
       <div className="HomeContainer">
         <div className="HomeWrapper">
           <div className="Projects">
-            <ProjectListItem />
-            <ProjectListItem />
-            <ProjectListItem />
+            <ProjectListItem projectId={1} role={"USER"} />
+            <ProjectListItem projectId={2} role={"DEVELOPER"} />
+            <ProjectListItem projectId={3} role={"EXPERT"} />
           </div>
         </div>
       </div>
