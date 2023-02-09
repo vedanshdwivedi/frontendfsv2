@@ -1,11 +1,11 @@
 import * as ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CreateProject from "./pages/createProject/CreateProject";
+import DevHome from "./pages/DevHome/DevHome";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Project from "./pages/project/project";
 import Signup from "./pages/signup/Signup";
-
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/create" element={<CreateProject />} />
         <Route path="/project" element={<Project />} />
+        <Route path="/dev" element={<DevHome id={null} />} />
       </Routes>
     </BrowserRouter>
   );

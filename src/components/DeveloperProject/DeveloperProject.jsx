@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import InputLabel from "@mui/material/InputLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
 import "./DeveloperProject.css";
 import { useNavigate } from "react-router-dom";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import Chat from "../Chat/Chat";
 import ActivityLogs from "../ActivityLogs/ActivityLogs";
 
@@ -88,10 +93,32 @@ const DeveloperProject = (prop) => {
             </div>
             <div className="devProjectControlButtons">
               <div className="uploadTransformationClassForm">
-                Upload Transformation Class Form Goes Here
+                <form>
+                  <div className="formElement">
+                    <div className="formElementLabel">
+                      Upload Transformation File
+                    </div>
+                    <input type="file"></input>
+                  </div>
+                  <div className="formElement">
+                    <button className="uploadTransformationFileButton">
+                      Upload
+                    </button>
+                  </div>
+                </form>
               </div>
               <div className="UpdateProjectStatusForm">
-                Update Project Status Form Goes Here
+                <div className="formElement">
+                  <div className="formElementLabel">Update Project Status</div>
+                  <select className="updateFromSelect">
+                    <option value="CREATED" selected>CREATED</option>
+                    <option value="CREATED">REJECTED</option>
+                    <option value="CREATED">IN-PROGRESS</option>
+                  </select>
+                </div>
+                <button className="uploadTransformationFileButton">
+                  Update Status
+                </button>
               </div>
             </div>
           </div>

@@ -1,0 +1,21 @@
+.devProjectTableContainer {
+  /* width: 100%; */
+  min-width: 820px;
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.devProjectLink {
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  gap: 5px;
+}
+
+.devProjectLink:hover {
+  font-size: 12px;
+  color: red;
+}
