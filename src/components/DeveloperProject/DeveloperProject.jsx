@@ -1,9 +1,153 @@
-import React from 'react'
+import React, { useState } from "react";
+import "./DeveloperProject.css";
+import { useNavigate } from "react-router-dom";
+import Chat from "../Chat/Chat";
+import ActivityLogs from "../ActivityLogs/ActivityLogs";
 
-const DeveloperProject = () => {
+const DeveloperProject = (prop) => {
+  const projectId = prop.id;
+  const navigate = useNavigate();
+  const [showExpertChatScreen, setShowExpertChatScreen] = useState(false);
+
+  const handleHomeClick = (url) => {
+    navigate(url);
+  };
   return (
-    <div>DeveloperProject</div>
-  )
-}
+    <div className="devProjectContainer">
+      <div className="devProjectWrapper">
+        <div className="leftDevProjectArea">
+          <div
+            className="homeNavigator"
+            onClick={() => {
+              handleHomeClick("/");
+            }}
+          >
+            <i class="fa-solid fa-backward"></i>
+            <div className="homeNavigatorText">Back</div>
+          </div>
+          <div className="devProjectBasicInfo">
+            <div className="devProjectBasicInfoData">
+              <div className="devProjectBasicInfoKey">Project Id</div>
+              <div className="devProjectBasicInfoValue">14324</div>
+            </div>
+            <div className="devProjectBasicInfoData">
+              <div className="devProjectBasicInfoKey">Project Owner</div>
+              <div className="devProjectBasicInfoValue">Albert Einstein</div>
+            </div>
+            <div className="devProjectBasicInfoData">
+              <div className="devProjectBasicInfoKey">Domain Expert</div>
+              <div className="devProjectBasicInfoValue">Vedansh Dwivedi</div>
+            </div>
+          </div>
+          <div className="devProjectControls">
+            <div className="devProjectControlInfo">
+              <div className="devProjectControlInfoItem">
+                <div className="devProjectControlInfoKey">Project Title</div>
+                <div className="devProjectControlInfoValue">
+                  Google Mobility Trends
+                </div>
+              </div>
+              <div className="devProjectControlInfoItem">
+                <div className="devProjectControlInfoKey">
+                  Project Algorithm
+                </div>
+                <div className="devProjectControlInfoValue">
+                  XGBoost Regressor
+                </div>
+              </div>
+              <div className="devProjectControlInfoItem">
+                <div className="devProjectControlInfoKey">Project Status</div>
+                <div className="devProjectControlInfoValue">CREATED</div>
+              </div>
+              <div className="devProjectControlInfoItem">
+                <div className="devProjectControlInfoKey">Created At</div>
+                <div className="devProjectControlInfoValue">
+                  Google Mobility Trends
+                </div>
+              </div>
+              <div className="devProjectControlInfoItem">
+                <div className="devProjectControlInfoKey">Last Updated At</div>
+                <div className="devProjectControlInfoValue">
+                  Google Mobility Trends
+                </div>
+              </div>
+              <div className="devProjectControlInfoItem">
+                <div className="devProjectControlInfoKey">
+                  Notification Email
+                </div>
+                <div className="devProjectControlInfoValue">
+                  vedanshdwivedi0@gmail.com
+                </div>
+              </div>
+              <div className="devProjectControlInfoItem">
+                <div className="devProjectControlInfoKey">Project Dataset</div>
+                <div className="devProjectControlInfoValue">
+                  <a href="#">Dataset Link</a>
+                </div>
+              </div>
+            </div>
+            <div className="devProjectControlButtons">
+              <div className="uploadTransformationClassForm">
+                Upload Transformation Class Form Goes Here
+              </div>
+              <div className="UpdateProjectStatusForm">
+                Update Project Status Form Goes Here
+              </div>
+            </div>
+          </div>
+          <div className="devProjectDescription">
+            <div className="devProjectDescriptionTitle">
+              Project Description
+            </div>
+            <p className="devProjectDescriptionContent" align="justify">
+              This is some random text to simulate the behaviour of the a long
+              passage to occupy the area for the project description. The left
+              sidebar is only supposed to have the project description. I need
+              to figure out how can I add that read more implementation. I am
+              adding more gibberish texts in order to occupy more area on the
+              frontend.This is some random text to simulate the behaviour of the
+              a long passage to occupy the area for the project description. The
+              left sidebar is only supposed to have the project description. I
+              need to figure out how can I add that read more implementation. I
+              am adding more gibberish texts in order to occupy more area on the
+              frontend. This is some random text to simulate the behaviour of
+              the a long passage to occupy the area for the project description.
+              The left sidebar is only supposed to have the project description.
+              I need to figure out how can I add that read more implementation.
+              I am adding more gibberish texts in order to occupy more area on
+              the frontend.
+            </p>
+          </div>
+          <div className="expertChatArea">
+            <div
+              className="expertChatAreaBubble"
+              onClick={() => {
+                setShowExpertChatScreen(!showExpertChatScreen);
+                console.log(showExpertChatScreen);
+              }}
+            >
+              Chat with Domain Expert
+            </div>
+            {showExpertChatScreen ? (
+              <div className="expertChatAreaContainer">
+                <Chat id={projectId} role={"DEVELOPER"} />
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+        <div className="rightDevProjectArea">
+          <div className="devActivityLogs">
+            <ActivityLogs id={projectId} />
+          </div>
+          <div className="devChatArea">
+            <Chat id={projectId} role={"DEVELOPER"} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default DeveloperProject
+export default DeveloperProject;

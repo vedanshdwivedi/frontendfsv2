@@ -1,16 +1,32 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import ActivityLogs from "../ActivityLogs/ActivityLogs";
 import Chat from "../Chat/Chat";
 import UserTasks from "../UserTasks/UserTasks";
 import "./UserProject.css";
 
 const UserProject = (prop) => {
+  const navigate = useNavigate();
+
+  const handleHomeClick = (url) => {
+    navigate(url);
+  };
+
   const projectId = prop.id;
   return (
     <>
       <div className="userProjectContainer">
         <div className="userProjectWrapper">
           <div className="leftUserProjectArea">
+            <div
+              className="homeNavigator"
+              onClick={() => {
+                handleHomeClick("/");
+              }}
+            >
+              <i class="fa-solid fa-backward"></i>
+              <div className="homeNavigatorText">Back</div>
+            </div>
             <div className="projectOwnerInfo">
               <div className="projectOwnerInfoData">
                 <div className="projectOwnerInfoKey">Project ID</div>

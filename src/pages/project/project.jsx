@@ -30,8 +30,8 @@ const Project = () => {
             <h1>You are not supposed to be here</h1>
           )}
         </div>
-        {/* {role !== "USER" ? <Footer /> : ""} */}
-        <Footer />
+        {role !== "DEVELOPER" ? <Footer /> : ""}
+        {/* <Footer /> */}
       </div>
     </>
   );

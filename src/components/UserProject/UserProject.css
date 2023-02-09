@@ -8,7 +8,6 @@
 .userProjectWrapper {
   display: flex;
   min-height: 650px;
-  /* border: 1px solid; */
   width: 100%;
   justify-content: space-between;
   gap: 20px;
@@ -84,6 +83,9 @@
   border: 1px solid;
   border-radius: 10px;
   padding: 10px;
+  overflow: scroll;
+  max-height: 150px;
+  padding: 10px;
 }
 
 .predictionTable {
@@ -148,12 +150,6 @@
   padding: 10px;
 }
 
-.projectDescriptionBox {
-  overflow: scroll;
-  max-height: 150px;
-  padding: 10px;
-}
-
 .projectDescriptionTitle {
   color: #3f5de1;
   padding: 10px;
@@ -166,6 +162,25 @@
   font-weight: bold;
 }
 
-.predictionTableElement{
-    min-height: 200px;
+.predictionTableElement {
+  min-height: 200px;
+}
+
+.homeNavigator {
+  display: flex;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  max-height: 20px;
+}
+.homeNavigator:hover {
+  font-size: 16px;
+}
+
+.homeNavigator > i {
+  color: red;
+}
+
+.homeNavigatorText:hover {
+  color: #3f5de1;
 }

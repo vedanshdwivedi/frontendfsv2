@@ -18,6 +18,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow-anchor: none;
 }
 
 .ChatTypingArea {
@@ -72,6 +73,8 @@
 }
 
 .chatMessageAvatar {
+  position: relative;
+  top: 15px;
   height: 15px;
   width: 15px;
   border: 2px solid red;
@@ -79,12 +82,13 @@
   padding: 5px 5px 5px 5px;
 }
 
-.chatMessageText{
-    font-size: 15px;
+.chatMessageText {
+  font-size: 15px;
 }
 
-.chatMessageContent{
-    background-color: antiquewhite;
-    padding: 10px;
-    border-radius: 10px;
+.chatMessageContent {
+  background-color: antiquewhite;
+  padding: 12px;
+  border-radius: 10px;
+  max-width: 70%;
 }

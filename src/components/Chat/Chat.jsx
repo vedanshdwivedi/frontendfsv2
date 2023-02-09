@@ -1,5 +1,6 @@
 import "./Chat.css";
 import React from "react";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 const Chat = (prop) => {
   const projectId = prop.id;
@@ -18,8 +19,8 @@ const Chat = (prop) => {
     {
       id: 2,
       threadId: "123213",
-      message: "This is sent by Developer",
-      createdAt: "2023-01-28 14:01:00",
+      message: "This is a reply sent by Developer for the above message",
+      createdAt: "2023-01-28 14:02:00",
       sentRole: "DEVELOPER",
       sentByUserId: "vedanshdwivedi",
       receiverRole: "USER",
@@ -28,8 +29,8 @@ const Chat = (prop) => {
     {
       id: 3,
       threadId: "123213",
-      message: "This is sent by User",
-      createdAt: "2023-01-28 14:01:00",
+      message: "This is again sent by User",
+      createdAt: "2023-01-28 14:03:00",
       sentRole: "USER",
       sentByUserId: "vedanshdwivedi",
       receiverRole: "DEVELOPER",
@@ -50,7 +51,7 @@ const Chat = (prop) => {
     <>
       <div className="ChatTitle">Chat</div>
       <div className="ChatContainer">
-        <div className="ChatMessageArea">
+        <ScrollToBottom className="ChatMessageArea">
           {messages.map((msg) => {
             const msgClass =
               msg.sentRole === role
@@ -75,7 +76,7 @@ const Chat = (prop) => {
               </>
             );
           })}
-        </div>
+        </ScrollToBottom>
         <div className="ChatTypingArea">
           <textarea name="message" id="message" cols="30" rows="2"></textarea>
           <button className="typingAreaSendButton">Send</button>
