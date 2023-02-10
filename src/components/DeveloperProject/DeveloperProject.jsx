@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-import InputLabel from "@mui/material/InputLabel";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControl from "@mui/material/FormControl";
 import "./DeveloperProject.css";
 import { useNavigate } from "react-router-dom";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import Chat from "../Chat/Chat";
 import ActivityLogs from "../ActivityLogs/ActivityLogs";
+import ProjectComments from "../ProjectComments/ProjectComments";
 
 const DeveloperProject = (prop) => {
   const projectId = prop.id;
@@ -145,6 +141,9 @@ const DeveloperProject = (prop) => {
               the frontend.
             </p>
           </div>
+          <div className="UserProjectCommentArea">
+              <ProjectComments id={projectId} role={"DEVELOPER"} />
+            </div>
           <div className="expertChatArea">
             <div
               className="expertChatAreaBubble"

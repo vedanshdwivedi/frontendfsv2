@@ -33,9 +33,6 @@
   background-color: rgba(195, 204, 212, 0.223);
 }
 
-.devProjectControls {
-  display: flex;
-}
 
 .devProjectBasicInfo {
   display: flex;
@@ -195,6 +192,10 @@
   margin: 10px;
 }
 
+.formElement > button {
+  margin-left: 0px;
+}
+
 .formElementLabel {
   margin-top: 10px;
 }
@@ -206,6 +207,7 @@
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .uploadTransformationFileButton:hover {

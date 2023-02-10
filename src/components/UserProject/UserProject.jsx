@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ActivityLogs from "../ActivityLogs/ActivityLogs";
 import Chat from "../Chat/Chat";
 import UserTasks from "../UserTasks/UserTasks";
+import ProjectComments from "../ProjectComments/ProjectComments"
 import "./UserProject.css";
 
 const UserProject = (prop) => {
@@ -110,7 +111,7 @@ const UserProject = (prop) => {
               </div>
             </div>
             <div className="projectDescriptionBox">
-              <div className="projectDescriptionTitle">Project Descriptiom</div>
+              <div className="projectDescriptionTitle">Project Description</div>
               <p className="projectDescriptionContent" align="justify">
                 This is some random text to simulate the behaviour of the a long
                 passage to occupy the area for the project description. The left
@@ -129,6 +130,9 @@ const UserProject = (prop) => {
                 how can I add that read more implementation. I am adding more
                 gibberish texts in order to occupy more area on the frontend.
               </p>
+            </div>
+            <div className="UserProjectCommentArea">
+              <ProjectComments id={projectId} role={"USER"} />
             </div>
             <div className="predictionTable">
               <div className="predictionTableTitle">Prediction Tasks</div>

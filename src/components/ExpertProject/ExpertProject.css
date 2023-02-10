@@ -1,0 +1,161 @@
+.ExpertProjectContainer {
+  margin-left: 20px;
+  padding-left: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.ExpertProjectWrapper {
+  display: flex;
+  min-height: 650px;
+  width: 100%;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: -1;
+}
+
+.LeftExpertProjectArea {
+  margin-top: 10px;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.RightExpertProjectArea {
+  flex: 1;
+  display: flex;
+  max-height: 750px;
+  top: 10px;
+  position: sticky;
+  flex-direction: column;
+  background-color: rgba(195, 204, 212, 0.223);
+}
+
+.ExpertProjectInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ExpertProjectInfoData {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  max-width: 300px;
+}
+
+.ExpertProjectInfoKey {
+  font-weight: 900;
+}
+
+.ExpertProjectInfoValue {
+  font-weight: 100;
+}
+
+.ExpertProjectControls {
+  display: flex;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+.ExpertProjectControlInfo {
+  flex: 6;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid;
+  padding: 10px;
+  gap: 10px;
+}
+
+.ExpertProjectControlButtons {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid;
+  padding: 10px 5px;
+  justify-content: space-evenly;
+}
+
+.ExpertProjectControlInfoItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: rgba(220, 236, 251, 0.355);
+  border-radius: 10px;
+}
+
+.ExpertProjectControlInfoItem:hover {
+  background-color: rgba(184, 218, 250, 0.355);
+}
+
+.ExpertProjectControlKey {
+  font-weight: bolder;
+}
+
+.ExpertProjectControlValue {
+  font-weight: 500;
+  color: #3f5de1;
+  font-size: 14px;
+}
+
+.ExpertProjectDescription {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 10px;
+  overflow: scroll;
+  max-height: 150px;
+  padding: 10px;
+}
+
+.ExpertProjectDescriptionTitle {
+  color: #3f5de1;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.ExpertProjectDescriptionContent {
+  margin: 10px;
+  padding: 10px;
+}
+
+.ExpertActivityLogs {
+  padding: 10px;
+  flex: 9;
+  border-bottom: 1px solid;
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.ExpertChatArea {
+  flex: 11;
+  padding: 10px;
+  border-top: 1px solid;
+}
+
+.ExpertProjectControlButtons {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid;
+  padding: 20px 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ExpertProjectControlButton {
+  padding: 10px;
+  width: 85%;
+  border-radius: 10px;
+  border: 1px solid #3f5de1;
+  font-size: 18px;
+  font-weight: 100;
+  background-color: white;
+  cursor: pointer;
+}
+
+.ExpertProjectControlButton:hover {
+  color: white;
+  background-color: #3f5de1;
+}

@@ -78,7 +78,7 @@ const Chat = (prop) => {
           })}
         </ScrollToBottom>
         <div className="ChatTypingArea">
-          <textarea name="message" id="message" cols="30" rows="2"></textarea>
+          <textarea placeholder="Message" name="message" id="message" cols="30" rows="2"></textarea>
           <button className="typingAreaSendButton">Send</button>
         </div>
       </div>

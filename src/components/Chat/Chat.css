@@ -29,7 +29,9 @@
 }
 
 .ChatTypingArea > textarea {
+  padding: 10px;
   resize: none;
+  border-radius: 10px;
 }
 
 .typingAreaSendButton {
