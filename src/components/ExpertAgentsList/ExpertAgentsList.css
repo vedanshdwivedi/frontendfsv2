@@ -1,0 +1,7 @@
+.ExpertAgentListContainer {
+  overflow-y: scroll;
+}
+
+.AgentListTileWrapper {
+  cursor: pointer;
+}

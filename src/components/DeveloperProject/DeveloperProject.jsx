@@ -20,7 +20,7 @@ const DeveloperProject = (prop) => {
           <div
             className="homeNavigator"
             onClick={() => {
-              handleHomeClick("/");
+              handleHomeClick("/dev");
             }}
           >
             <i class="fa-solid fa-backward"></i>

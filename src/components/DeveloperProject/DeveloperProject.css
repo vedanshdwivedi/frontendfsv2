@@ -118,7 +118,7 @@
   border: 1px solid;
   border-radius: 10px;
   padding: 10px;
-  overflow: scroll;
+  overflow-y: scroll;
   max-height: 150px;
   padding: 10px;
 }
@@ -172,7 +172,7 @@
   flex: 9;
   border-bottom: 1px solid;
   max-height: 300px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .devChatArea {

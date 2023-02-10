@@ -1,9 +1,12 @@
 import "./Chat.css";
 import React from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
+import { useLocation } from "react-router-dom";
+const _ = require("lodash");
 
 const Chat = (prop) => {
-  const projectId = prop.id;
+  const location = useLocation();
+  const projectId = prop.id || _.get(location, "state.id");
   const role = prop.role;
   const messages = [
     {
@@ -78,7 +81,13 @@ const Chat = (prop) => {
           })}
         </ScrollToBottom>
         <div className="ChatTypingArea">
-          <textarea placeholder="Message" name="message" id="message" cols="30" rows="2"></textarea>
+          <textarea
+            placeholder="Message"
+            name="message"
+            id="message"
+            cols="30"
+            rows="2"
+          ></textarea>
           <button className="typingAreaSendButton">Send</button>
         </div>
       </div>

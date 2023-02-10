@@ -1,0 +1,9 @@
+.ExpertProjectListContainer{
+    margin: 10px;
+    padding: 10px;
+}
+
+.ExpertOpenProjectLink{
+    color: red;
+    cursor: pointer;
+}

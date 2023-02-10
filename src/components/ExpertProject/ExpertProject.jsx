@@ -22,7 +22,7 @@ const ExpertProject = (prop) => {
             <div
               className="homeNavigator"
               onClick={() => {
-                handleHomeClick("/");
+                handleHomeClick("/expert");
               }}
             >
               <i class="fa-solid fa-backward"></i>

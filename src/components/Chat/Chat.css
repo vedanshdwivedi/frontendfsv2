@@ -14,7 +14,7 @@
   background-color: aliceblue;
   min-height: 300px;
   max-height: 300px;
-  overflow: scroll;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   gap: 10px;
