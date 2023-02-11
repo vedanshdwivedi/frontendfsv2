@@ -11,6 +11,7 @@ const Navbar = (prop) => {
   };
 
   const handleLogout = () => {
+    localStorage.clear();
     handleNavigate("/login");
   };
 

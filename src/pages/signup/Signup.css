@@ -84,3 +84,11 @@
 .disabledButton {
   cursor: not-allowed;
 }
+
+.signupError {
+  margin: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  color: rgb(247, 69, 69);
+  cursor: default;
+}

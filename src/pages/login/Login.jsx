@@ -1,14 +1,52 @@
 import "./Login.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [loginErrors, setLoginErrors] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleNavigate = (urlPath) => {
     navigate(urlPath);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, []);
+
+  const handleLoginClick = async () => {
+    setLoginErrors(null);
+    const url = "/auth/login";
+    const data = {
+      email,
+      password,
+    };
+    const config = {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+    };
+    await axios
+      .post(url, data, config)
+      .then((response) => {
+        if (response.status === 200) {
+          localStorage.setItem("token", response.data.data);
+          window.location = "/";
+        }
+      })
+      .catch((error) => {
+        setPassword("");
+        if (error.response.data.message) {
+          setLoginErrors(error.response.data.message);
+        }
+      });
   };
 
   return (
@@ -20,6 +58,7 @@ const Login = () => {
             <input
               type="text"
               placeholder="Email"
+              value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -28,6 +67,7 @@ const Login = () => {
           <div className="loginFormItem">
             <input
               type="password"
+              value={password}
               placeholder="Password"
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -46,7 +86,7 @@ const Login = () => {
               }
               onClick={() => {
                 if (email !== "" && password !== "") {
-                  handleNavigate("/");
+                  handleLoginClick();
                 }
               }}
             >
@@ -69,12 +109,23 @@ const Login = () => {
           <div
             className="signUpButton"
             onClick={() => {
-              handleNavigate("/signup");
+              if (email !== "" && password !== "") {
+                handleNavigate("/signup");
+              }
             }}
           >
             Sign Up to create new account
           </div>
         </div>
+        {loginErrors === null ? (
+          ""
+        ) : (
+          <>
+            <div className="loginError" onClick={() => {}}>
+              <p align="center">{loginErrors}</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,16 +1,58 @@
 import "./Signup.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [lname, setLname] = useState("");
   const [fname, setFname] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
-  const handleNavigate = (urlPath) => {
-    navigate(urlPath);
+  const [signupErrors, setSignupErrors] = useState(null);
+
+  const capitalizeFirst = (content) => {
+    return content.charAt(0).toUpperCase() + content.slice(1).toLowerCase();
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, []);
+
+  const handleSignUp = async () => {
+    setSignupErrors(null);
+    const data = {
+      name: `${fname} ${lname}`,
+      email: email,
+      password: password,
+    };
+    const config = {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+    };
+    const url = "/auth/";
+    await axios
+      .post(url, data, config)
+      .then((response) => {
+        setEmail("");
+        setPassword("");
+        setFname("");
+        setLname("");
+        if (response.status === 200 || response.status === 201) {
+          navigate("/login");
+        }
+      })
+      .catch((error) => {
+        setPassword("");
+        if (error.response.data.message) {
+          setSignupErrors(error.response.data.message);
+        }
+      });
   };
 
   return (
@@ -22,6 +64,7 @@ const Signup = () => {
             <input
               type="text"
               placeholder="Email"
+              value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -31,24 +74,27 @@ const Signup = () => {
           <div className="signupFormItem">
             <input
               type="text"
+              value={fname}
               placeholder="First Name"
               onChange={(e) => {
-                setFname(e.target.value);
+                setFname(capitalizeFirst(e.target.value));
               }}
             />
           </div>
           <div className="signupFormItem">
             <input
               type="text"
+              value={lname}
               placeholder="Last Name"
               onChange={(e) => {
-                setLname(e.target.value);
+                setLname(capitalizeFirst(e.target.value));
               }}
             />
           </div>
           <div className="signupFormItem">
             <input
               type="password"
+              value={password}
               placeholder="Password"
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -69,7 +115,7 @@ const Signup = () => {
                   fname !== "" &&
                   lname !== ""
                 ) {
-                  handleNavigate("/");
+                  handleSignUp();
                 }
               }}
             >
@@ -81,12 +127,22 @@ const Signup = () => {
           <div
             className="loginButtonNavigator"
             onClick={() => {
-              handleNavigate("/login");
+              navigate("/login");
             }}
           >
+            {}
             Login, if you already have an account
           </div>
         </div>
+        {signupErrors === null ? (
+          ""
+        ) : (
+          <>
+            <div className="signupError" onClick={() => {}}>
+              <p align="center">{signupErrors}</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

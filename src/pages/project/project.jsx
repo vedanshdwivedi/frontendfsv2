@@ -1,5 +1,5 @@
-import { React } from "react";
-import { useLocation } from "react-router-dom";
+import { React, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import UserProject from "../../components/UserProject/UserProject";
@@ -9,6 +9,15 @@ import "./project.css";
 const _ = require("lodash");
 
 const Project = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
+
   const location = useLocation();
 
   console.log(location.state);

@@ -1,11 +1,17 @@
 import "./CreateProject.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 
 const CreateProject = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+    }
+  }, []);
 
   const [title, setTitle] = useState("");
 
