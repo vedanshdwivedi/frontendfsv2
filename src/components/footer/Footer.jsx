@@ -6,7 +6,7 @@ const Footer = () => {
     <div className="Footer">
       <div className="FooterWrapper">
         <div className="footerTitle">
-          Made with <i class="fa-solid fa-heart"></i> by Vedansh Dwivedi
+          Made with <i className="fa-solid fa-heart"></i> by Vedansh Dwivedi
         </div>
         <div className="footerSubtitle">Copyright &copy; 2023, Feynlabs.ai</div>
       </div>

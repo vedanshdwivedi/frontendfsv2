@@ -1,11 +1,19 @@
 import "./ProjectListItem.css";
 import { React } from "react";
 import { useNavigate } from "react-router-dom";
+import { formatDateString } from "../../utility";
 
 const ProjectListItem = (prop) => {
   const navigate = useNavigate();
   const projectId = prop.projectId;
   const role = prop.role;
+  const title = prop.projectTitle;
+  const description = prop.projectDescription;
+  const status = prop.projectStatus;
+  const email = prop.projectEmail;
+  const algortihm = prop.projectAlgorithm;
+  const createdAt = prop.createdAt;
+  const updatedAt = prop.updatedAt;
 
   const deleteProject = async () => {
     console.log("Deleting Project");
@@ -24,42 +32,42 @@ const ProjectListItem = (prop) => {
               <i className="fa-solid fa-signature"></i>
               <label>Title</label>
             </div>
-            <div className="ProjectValue">AI Regressor</div>
+            <div className="ProjectValue">{title}</div>
           </div>
           <div className="rightProjectListItem">
             <div className="ProjectLabel">
               <i className="fa-solid fa-list-ol"></i>
               <label>Status</label>
             </div>
-            <div className="ProjectValue">CREATED</div>
+            <div className="ProjectValue">{status.toUpperCase()}</div>
           </div>
           <div className="rightProjectListItem">
             <div className="ProjectLabel">
               <i className="fa-regular fa-at"></i>
               <label>Notification Email</label>
             </div>
-            <div className="ProjectValue">vedansh@gmail.com</div>
+            <div className="ProjectValue">{email}</div>
           </div>
           <div className="rightProjectListItem">
             <div className="ProjectLabel">
               <i className="fa-solid fa-code-branch"></i>
               <label>Algorithm</label>
             </div>
-            <div className="ProjectValue">XG Boost Regressor</div>
+            <div className="ProjectValue">{algortihm.toUpperCase()}</div>
           </div>
           <div className="rightProjectListItem">
             <div className="ProjectLabel">
               <i className="fa-solid fa-clock"></i>
               <label>Created Date</label>
             </div>
-            <div className="ProjectValue">27 January 2023, 12:04 PM UTC</div>
+            <div className="ProjectValue">{formatDateString(createdAt)}</div>
           </div>
           <div className="rightProjectListItem">
             <div className="ProjectLabel">
               <i className="fa-solid fa-pen"></i>
               <label>Last Updated</label>
             </div>
-            <div className="ProjectValue">27 January 2023, 12:04 PM UTC</div>
+            <div className="ProjectValue">{formatDateString(updatedAt)}</div>
           </div>
           <div className="ProjectListItemControl">
             <div className="ProjectListItemControlElement">
@@ -91,24 +99,7 @@ const ProjectListItem = (prop) => {
               <label>Description</label>
             </div>
             <div className="DescriptionText ProjectValue">
-              <p align="justify">
-                This is some random text to simulate the behaviour of the a long
-                passage to occupy the area for the project description. The left
-                sidebar is only supposed to have the project description. I need
-                to figure out how can I add that read more implementation. I am
-                adding more gibberish texts in order to occupy more area on the
-                frontend.This is some random text to simulate the behaviour of
-                the a long passage to occupy the area for the project
-                description. The left sidebar is only supposed to have the
-                project description. I need to figure out how can I add that
-                read more implementation. I am adding more gibberish texts in
-                order to occupy more area on the frontend. This is some random
-                text to simulate the behaviour of the a long passage to occupy
-                the area for the project description. The left sidebar is only
-                supposed to have the project description. I need to figure out
-                how can I add that read more implementation. I am adding more
-                gibberish texts in order to occupy more area on the frontend.
-              </p>
+              <p align="justify">{description}</p>
             </div>
           </div>
         </div>

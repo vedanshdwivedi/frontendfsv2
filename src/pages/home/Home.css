@@ -3,6 +3,7 @@
   align-items: center;
   width: 100%;
   display: flex;
+  min-height: 300px;
 }
 
 .Projects {
@@ -10,4 +11,14 @@
   max-width: 1024px;
   justify-content: center;
   padding: 20px;
+}
+
+.CreateProjectLink {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.CreateProjectLink:hover {
+  cursor: pointer;
+  background-color: rgba(209, 214, 219, 0.625);
 }

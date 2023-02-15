@@ -9,6 +9,7 @@ const Signup = () => {
   const [lname, setLname] = useState("");
   const [fname, setFname] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [signupErrors, setSignupErrors] = useState(null);
 
@@ -25,6 +26,7 @@ const Signup = () => {
 
   const handleSignUp = async () => {
     setSignupErrors(null);
+    setLoading(true);
     const data = {
       name: `${fname} ${lname}`,
       email: email,
@@ -43,12 +45,14 @@ const Signup = () => {
         setPassword("");
         setFname("");
         setLname("");
+        setLoading(false);
         if (response.status === 200 || response.status === 201) {
           navigate("/login");
         }
       })
       .catch((error) => {
         setPassword("");
+        setLoading(false);
         if (error.response.data.message) {
           setSignupErrors(error.response.data.message);
         }

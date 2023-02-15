@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import HashSpinner from "../../components/HashSpinner/HashSpinner";
 
 const Login = () => {
   const navigate = useNavigate();
   const [loginErrors, setLoginErrors] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,6 +25,7 @@ const Login = () => {
 
   const handleLoginClick = async () => {
     setLoginErrors(null);
+    setLoading(true);
     const url = "/auth/login";
     const data = {
       email,
@@ -38,11 +41,14 @@ const Login = () => {
       .then((response) => {
         if (response.status === 200) {
           localStorage.setItem("token", response.data.data);
+          localStorage.setItem("userId", response.data.userId);
+          localStorage.setItem("role", response.data.role);
           window.location = "/";
         }
       })
       .catch((error) => {
         setPassword("");
+        setLoading(false);
         if (error.response.data.message) {
           setLoginErrors(error.response.data.message);
         }
@@ -78,20 +84,26 @@ const Login = () => {
             <h3 className="forgotPassword">Forgot Password?</h3>
           </div>
           <div className="loginButtonWrapper">
-            <button
-              className={
-                email !== "" && password !== ""
-                  ? "loginButton"
-                  : "loginButton disabledButton"
-              }
-              onClick={() => {
-                if (email !== "" && password !== "") {
-                  handleLoginClick();
-                }
-              }}
-            >
-              Login
-            </button>
+            {loading ? (
+              <HashSpinner size={30} />
+            ) : (
+              <>
+                <button
+                  className={
+                    email !== "" && password !== ""
+                      ? "loginButton"
+                      : "loginButton disabledButton"
+                  }
+                  onClick={() => {
+                    if (email !== "" && password !== "") {
+                      handleLoginClick();
+                    }
+                  }}
+                >
+                  Login
+                </button>
+              </>
+            )}
           </div>
         </div>
         <div className="socialButtons">
@@ -109,9 +121,7 @@ const Login = () => {
           <div
             className="signUpButton"
             onClick={() => {
-              if (email !== "" && password !== "") {
-                handleNavigate("/signup");
-              }
+              handleNavigate("/signup");
             }}
           >
             Sign Up to create new account

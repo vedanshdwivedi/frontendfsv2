@@ -29,7 +29,7 @@ const Navbar = (prop) => {
         <div className="navbarItems">
           {showCreateButton && (
             <div className="navbarItem">
-              <i class="fa-solid fa-folder-plus"></i>
+              <i className="fa-solid fa-folder-plus"></i>
               <button
                 className="createNavbarProjectButton"
                 onClick={() => {
