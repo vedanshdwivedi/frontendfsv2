@@ -47,7 +47,6 @@ const Home = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
         if (error.response.status === 401) {
           localStorage.clear();
@@ -77,6 +76,8 @@ const Home = () => {
                     createdAt={Date(project.createdAt)}
                     updatedAt={Date(project.updatedAt)}
                     projectId={project.pid}
+                    expert={project.expert}
+                    developer={project.developer}
                     role={role}
                   />
                 );

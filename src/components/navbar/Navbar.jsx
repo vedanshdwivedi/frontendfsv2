@@ -1,6 +1,7 @@
 import "./Navbar.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Navbar = (prop) => {
   const navigate = useNavigate();
@@ -10,7 +11,17 @@ const Navbar = (prop) => {
     navigate(url_path);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    const url = "/auth/logout";
+    const payload = {
+      email: localStorage.getItem("email"),
+    };
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+    await axios.post(url, payload, config);
     localStorage.clear();
     handleNavigate("/login");
   };

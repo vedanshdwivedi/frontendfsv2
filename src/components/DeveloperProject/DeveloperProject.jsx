@@ -149,7 +149,6 @@ const DeveloperProject = (prop) => {
               className="expertChatAreaBubble"
               onClick={() => {
                 setShowExpertChatScreen(!showExpertChatScreen);
-                console.log(showExpertChatScreen);
               }}
             >
               Chat with Domain Expert

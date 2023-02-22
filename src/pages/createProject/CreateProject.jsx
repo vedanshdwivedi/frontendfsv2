@@ -8,12 +8,6 @@ import axios from "axios";
 
 const CreateProject = () => {
   const navigate = useNavigate();
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-    }
-  }, []);
 
   const [title, setTitle] = useState("");
   const [algorithm, setAlgorithm] = useState("");
@@ -22,6 +16,33 @@ const CreateProject = () => {
   const [file, setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [createErrors, setCreateErrors] = useState(null);
+  const [algorithmMap, setAlgorithmMap] = useState([]);
+  const [loadingAlgorithm, setLoadingAlgorithm] = useState(false);
+
+  const handleAlgorithms = async () => {
+    setLoadingAlgorithm(true);
+    const url = "/algorithm";
+    await axios
+      .get(url)
+      .then((response) => {
+        setLoadingAlgorithm(false);
+        if (response.status === 200) {
+          setAlgorithmMap(response.data.data);
+        }
+      })
+      .catch((error) => {
+        setLoadingAlgorithm(false);
+        window.location = "/";
+      });
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+    handleAlgorithms();
+  }, []);
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -48,7 +69,6 @@ const CreateProject = () => {
     formdata.append("description", description);
     formdata.append("project_name", title);
     formdata.append("algorithm", algorithm);
-    console.log("FormData : ", formdata);
     await axios
       .post(url, formdata, config)
       .then((response) => {
@@ -97,16 +117,30 @@ const CreateProject = () => {
                 <i className="fa-solid fa-code-branch"></i>
                 <label>Algorithm</label>
               </div>
-              <select
-                onChange={(e) => {
-                  setAlgorithm(e.target.value);
-                }}
-                value={algorithm}
-              >
-                <option value={algorithm}>XG Boost Regressor</option>
-                <option value="svm">Support Vector Machines (SVM)</option>
-                <option value="svm">Decision Trees</option>
-              </select>
+              {loadingAlgorithm ? (
+                <>
+                  <HashSpinner size={20} />
+                </>
+              ) : (
+                <>
+                  <select
+                    onChange={(e) => {
+                      setAlgorithm(e.target.value);
+                    }}
+                    value={algorithm}
+                  >
+                    {algorithmMap.map((algo) => {
+                      return (
+                        <>
+                          <option value={algo.algorithmCode}>
+                            {algo.algorithmName}
+                          </option>
+                        </>
+                      );
+                    })}
+                  </select>
+                </>
+              )}
             </div>
             <div className="CreateProjectFormItem">
               <div className="CreateProjectFormItemLabel">

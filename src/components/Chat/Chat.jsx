@@ -2,84 +2,114 @@ import "./Chat.css";
 import React from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { formatDateString } from "../../utility";
+import HashSpinner from "../HashSpinner/HashSpinner";
 const _ = require("lodash");
 
 const Chat = (prop) => {
   const location = useLocation();
   const projectId = prop.id || _.get(location, "state.id");
-  const role = prop.role;
-  const messages = [
-    {
-      id: 1,
-      threadId: "123213",
-      message: "This is sent by User",
-      createdAt: "2023-01-28 14:01:00",
-      sentRole: "USER",
-      sentByUserId: "vedanshdwivedi",
-      receiverRole: "DEVELOPER",
-      receiveByUserId: "vedanshdeveloper",
-    },
-    {
-      id: 2,
-      threadId: "123213",
-      message: "This is a reply sent by Developer for the above message",
-      createdAt: "2023-01-28 14:02:00",
-      sentRole: "DEVELOPER",
-      sentByUserId: "vedanshdwivedi",
-      receiverRole: "USER",
-      receiveByUserId: "vedanshdeveloper",
-    },
-    {
-      id: 3,
-      threadId: "123213",
-      message: "This is again sent by User",
-      createdAt: "2023-01-28 14:03:00",
-      sentRole: "USER",
-      sentByUserId: "vedanshdwivedi",
-      receiverRole: "DEVELOPER",
-      receiveByUserId: "vedanshdeveloper",
-    },
-    {
-      id: 4,
-      threadId: "123213",
-      message: "This is sent by Developer",
-      createdAt: "2023-01-28 14:05:00",
-      sentRole: "DEVELOPER",
-      sentByUserId: "vedanshdwivedi",
-      receiverRole: "USER",
-      receiveByUserId: "vedanshdeveloper",
-    },
-  ];
+  const receiver = prop.receiver;
+  const threadId = prop.threadId;
+  const [loading, setLoading] = useState(false);
+  const [rows, setRows] = useState([]);
+  const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
+
+  const fetchMessageByThreads = async () => {
+    setLoading(false);
+    const url = `/message/${threadId}`;
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+    await axios
+      .get(url, config)
+      .then((response) => {
+        setLoading(false);
+        if (response.status === 200) {
+          setRows(response.data.data);
+        }
+      })
+      .catch(() => {
+        // setLoading(true);
+      });
+  };
+
+  const handleMessageSent = async () => {
+    setSending(true);
+    const data = {
+      sender: localStorage.getItem("username"),
+      content: message,
+      projectId: projectId,
+      receiver: receiver,
+    };
+    setMessage("");
+    const url = `/message/send`;
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+    await axios
+      .post(url, data, config)
+      .then((response) => {
+        setSending(false);
+        if (response.status === 200 || response.status === 201) {
+          fetchMessageByThreads();
+        }
+      })
+      .catch((error) => {
+        setSending(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchMessageByThreads();
+  }, []);
+
   return (
     <>
       <div className="ChatTitle">Chat</div>
       <div className="ChatContainer">
-        <ScrollToBottom className="ChatMessageArea">
-          {messages.map((msg) => {
-            const msgClass =
-              msg.sentRole === role
-                ? "chatMessageItemReverse"
-                : "chatMessageItem";
-            return (
-              <>
-                <div className={msgClass}>
-                  <div className="chatMessageAvatar">
-                    {msg.sentByUserId.charAt(0).toUpperCase()}
-                  </div>
-                  <div className="chatMessageContent">
-                    <div className="chatMessageText">{msg.message}</div>
-                    <div className="chatMessageTextDetails">
-                      <div className="chatMessageTimestamp">
-                        {msg.createdAt}
+        {loading ? (
+          <>
+            <HashSpinner size={30} />
+          </>
+        ) : (
+          <>
+            <ScrollToBottom className="ChatMessageArea">
+              {rows.map((msg) => {
+                const msgClass =
+                  msg.sender === localStorage.getItem("username")
+                    ? "chatMessageItemReverse"
+                    : "chatMessageItem";
+                return (
+                  <>
+                    <div className={msgClass}>
+                      <div className="chatMessageAvatar">
+                        {msg.sender.charAt(0).toUpperCase()}
                       </div>
-                      <div className="chatMessageRole">{msg.sentRole}</div>
+                      <div className="chatMessageContent">
+                        <div className="chatMessageText">{msg.content}</div>
+                        <div className="chatMessageTextDetails">
+                          <div className="chatMessageTimestamp">
+                            {formatDateString(msg.createdAt)}
+                          </div>
+                          <div className="chatMessageRole">{msg.sentRole}</div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </>
-            );
-          })}
-        </ScrollToBottom>
+                  </>
+                );
+              })}
+            </ScrollToBottom>
+          </>
+        )}
         <div className="ChatTypingArea">
           <textarea
             placeholder="Message"
@@ -87,8 +117,29 @@ const Chat = (prop) => {
             id="message"
             cols="30"
             rows="2"
+            value={message}
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
           ></textarea>
-          <button className="typingAreaSendButton">Send</button>
+          {sending ? (
+            <>
+              <HashSpinner size={20} />
+            </>
+          ) : (
+            <>
+              <button
+                className="typingAreaSendButton"
+                onClick={() => {
+                  if (message !== "") {
+                    handleMessageSent();
+                  }
+                }}
+              >
+                Send
+              </button>
+            </>
+          )}
         </div>
       </div>
     </>

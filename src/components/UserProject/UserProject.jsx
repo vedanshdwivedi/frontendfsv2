@@ -1,19 +1,95 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ActivityLogs from "../ActivityLogs/ActivityLogs";
 import Chat from "../Chat/Chat";
 import UserTasks from "../UserTasks/UserTasks";
-import ProjectComments from "../ProjectComments/ProjectComments"
+import ProjectComments from "../ProjectComments/ProjectComments";
 import "./UserProject.css";
+import axios from "axios";
+import HashSpinner from "../HashSpinner/HashSpinner";
+import { useEffect } from "react";
+import { formatDateString } from "../../utility";
+import { Drawer } from "antd";
+import UpdateProject from "../updateProject/updateProject";
+import CreatePrediction from "../createPrediction/CreatePrediction";
+import UpdateDataset from "../updateDataset/UpdateDataset";
 
 const UserProject = (prop) => {
   const navigate = useNavigate();
+  const [downloadLink, setDownloadLink] = useState("#");
+  const [fetchingDownloadLink, setFetchingDownloadLink] = useState(false);
+  const [fetchingThreadId, setFetchingThreadId] = useState(false);
+  const [threadId, setThreadId] = useState("");
+  const [updateVisible, setUpdateVisible] = useState(false);
+  const [drawerTitle, setDrawerTitle] = useState("");
+  const [drawerState, setDrawerState] = useState({
+    update: false,
+    dataset: false,
+    prediction: false,
+  });
+
+  const fetchProjectDatasetDownloadLink = async () => {
+    setFetchingDownloadLink(true);
+
+    const url = `/project/dataset/${projectId}`;
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+    await axios
+      .get(url, config)
+      .then((response) => {
+        setFetchingDownloadLink(false);
+        if (response.status === 200) {
+          setDownloadLink(response.data.data.downloadLink);
+        }
+      })
+      .catch((error) => {
+        setFetchingDownloadLink(false);
+      });
+  };
+
+  const fetchThreadId = async () => {
+    setFetchingThreadId(true);
+    const url = `/project/${projectId}/thread`;
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+    await axios
+      .get(url, config)
+      .then((response) => {
+        setFetchingThreadId(false);
+        if (response.status === 200) {
+          setThreadId(response.data.data._id);
+        }
+      })
+      .catch((error) => {
+        setFetchingThreadId(false);
+        window.location = "/";
+      });
+  };
+
+  useEffect(() => {
+    fetchProjectDatasetDownloadLink();
+    fetchThreadId();
+  }, []);
 
   const handleHomeClick = (url) => {
     navigate(url);
   };
-
   const projectId = prop.id;
+  const title = prop.title;
+  const description = prop.description;
+  const status = prop.status;
+  const email = prop.email;
+  const algorithm = prop.algorithm;
+  const createdAt = prop.createdAt;
+  const updatedAt = prop.updatedAt;
+  const expert = prop.expert;
+  const developer = prop.developer;
   return (
     <>
       <div className="userProjectContainer">
@@ -31,43 +107,43 @@ const UserProject = (prop) => {
             <div className="projectOwnerInfo">
               <div className="projectOwnerInfoData">
                 <div className="projectOwnerInfoKey">Project ID</div>
-                <div className="projectOwnerInfoValue">14324</div>
+                <div className="projectOwnerInfoValue">{projectId}</div>
               </div>
               <div className="projectOwnerInfoData">
                 <div className="projectOwnerInfoKey">Developer</div>
-                <div className="projectOwnerInfoValue">Vedansh Dwivedi</div>
+                <div className="projectOwnerInfoValue">{developer}</div>
               </div>
               <div className="projectOwnerInfoData">
                 <div className="projectOwnerInfoKey">Domain Expert</div>
-                <div className="projectOwnerInfoValue">Vedansh Dwivedi</div>
+                <div className="projectOwnerInfoValue">{expert}</div>
               </div>
             </div>
             <div className="projectControlArea">
               <div className="leftProjectControlArea">
                 <div className="leftProjectControlAreaItem">
                   <div className="leftProjectControlAreaKey">Project Title</div>
-                  <div className="leftProjectControlAreaValue">
-                    Google Mobility Trends
-                  </div>
+                  <div className="leftProjectControlAreaValue">{title}</div>
                 </div>
                 <div className="leftProjectControlAreaItem">
                   <div className="leftProjectControlAreaKey">
                     Project Algorithm
                   </div>
                   <div className="leftProjectControlAreaValue">
-                    XGBoost Regressor
+                    {algorithm.toUpperCase()}
                   </div>
                 </div>
                 <div className="leftProjectControlAreaItem">
                   <div className="leftProjectControlAreaKey">
                     Project Status
                   </div>
-                  <div className="leftProjectControlAreaValue">CREATED</div>
+                  <div className="leftProjectControlAreaValue">
+                    {status.toUpperCase()}
+                  </div>
                 </div>
                 <div className="leftProjectControlAreaItem">
                   <div className="leftProjectControlAreaKey">Created At</div>
                   <div className="leftProjectControlAreaValue">
-                    Google Mobility Trends
+                    {formatDateString(createdAt)}
                   </div>
                 </div>
                 <div className="leftProjectControlAreaItem">
@@ -75,34 +151,73 @@ const UserProject = (prop) => {
                     Last Updated At
                   </div>
                   <div className="leftProjectControlAreaValue">
-                    Google Mobility Trends
+                    {formatDateString(updatedAt)}
                   </div>
                 </div>
                 <div className="leftProjectControlAreaItem">
                   <div className="leftProjectControlAreaKey">
                     Notification Email
                   </div>
-                  <div className="leftProjectControlAreaValue">
-                    vedanshchandradwivedi@gmail.com
-                  </div>
+                  <div className="leftProjectControlAreaValue">{email}</div>
                 </div>
                 <div className="leftProjectControlAreaItem">
                   <div className="leftProjectControlAreaKey">
                     Project Dataset
                   </div>
                   <div className="leftProjectControlAreaValue">
-                    <a href="#">Dataset Link</a>
+                    {fetchingDownloadLink ? (
+                      <>
+                        <HashSpinner size={10} />
+                      </>
+                    ) : (
+                      <>
+                        <a href={downloadLink}>Dataset Link</a>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
               <div className="rightProjectControlArea">
-                <button className="rightProjectControlAreaButton">
+                <button
+                  className="rightProjectControlAreaButton"
+                  onClick={() => {
+                    setUpdateVisible(!updateVisible);
+                    setDrawerTitle("Update Project Info");
+                    setDrawerState({
+                      update: true,
+                      dataset: false,
+                      prediction: false,
+                    });
+                  }}
+                >
                   Edit Project Info
                 </button>
-                <button className="rightProjectControlAreaButton">
+                <button
+                  className="rightProjectControlAreaButton"
+                  onClick={() => {
+                    setUpdateVisible(!updateVisible);
+                    setDrawerTitle("Update Training Dataset");
+                    setDrawerState({
+                      update: false,
+                      dataset: true,
+                      prediction: false,
+                    });
+                  }}
+                >
                   Edit Project Dataset
                 </button>
-                <button className="rightProjectControlAreaButton">
+                <button
+                  className="rightProjectControlAreaButton"
+                  onClick={() => {
+                    setUpdateVisible(!updateVisible);
+                    setDrawerTitle("Fetch Predictions");
+                    setDrawerState({
+                      update: false,
+                      dataset: false,
+                      prediction: true,
+                    });
+                  }}
+                >
                   Create a Prediction Task
                 </button>
                 <button className="rightProjectControlAreaButton">
@@ -113,22 +228,7 @@ const UserProject = (prop) => {
             <div className="projectDescriptionBox">
               <div className="projectDescriptionTitle">Project Description</div>
               <p className="projectDescriptionContent" align="justify">
-                This is some random text to simulate the behaviour of the a long
-                passage to occupy the area for the project description. The left
-                sidebar is only supposed to have the project description. I need
-                to figure out how can I add that read more implementation. I am
-                adding more gibberish texts in order to occupy more area on the
-                frontend.This is some random text to simulate the behaviour of
-                the a long passage to occupy the area for the project
-                description. The left sidebar is only supposed to have the
-                project description. I need to figure out how can I add that
-                read more implementation. I am adding more gibberish texts in
-                order to occupy more area on the frontend. This is some random
-                text to simulate the behaviour of the a long passage to occupy
-                the area for the project description. The left sidebar is only
-                supposed to have the project description. I need to figure out
-                how can I add that read more implementation. I am adding more
-                gibberish texts in order to occupy more area on the frontend.
+                {description}
               </p>
             </div>
             <div className="UserProjectCommentArea">
@@ -146,10 +246,53 @@ const UserProject = (prop) => {
               <ActivityLogs id={projectId} />
             </div>
             <div className="chatContainer">
-              <Chat id={projectId} role={"USER"} />
+              {fetchingThreadId ? (
+                <>
+                  <HashSpinner size={30} />
+                </>
+              ) : (
+                <>
+                  <Chat
+                    id={projectId}
+                    threadId={threadId}
+                    receiver={developer}
+                  />
+                </>
+              )}
             </div>
           </div>
         </div>
+        <Drawer
+          visible={updateVisible}
+          title={drawerTitle}
+          closable={true}
+          onClose={() => {
+            setUpdateVisible(false);
+          }}
+        >
+          {drawerState["dataset"] ? (
+            <>
+              <UpdateDataset projectId={projectId} />
+            </>
+          ) : drawerState["prediction"] ? (
+            <>
+              <CreatePrediction />
+            </>
+          ) : drawerState["update"] ? (
+            <>
+              <>
+                <UpdateProject
+                  projectId={projectId}
+                  email={email}
+                  title={title}
+                  description={description}
+                />
+              </>
+            </>
+          ) : (
+            ""
+          )}
+        </Drawer>
       </div>
     </>
   );

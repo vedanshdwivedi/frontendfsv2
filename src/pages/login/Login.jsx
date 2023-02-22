@@ -43,6 +43,9 @@ const Login = () => {
           localStorage.setItem("token", response.data.data);
           localStorage.setItem("userId", response.data.userId);
           localStorage.setItem("role", response.data.role);
+          localStorage.setItem("email", response.data.email);
+          localStorage.setItem("username", response.data.username);
+          localStorage.setItem("name", response.data.name)
           window.location = "/";
         }
       })

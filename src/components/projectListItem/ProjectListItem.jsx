@@ -2,6 +2,9 @@ import "./ProjectListItem.css";
 import { React } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatDateString } from "../../utility";
+import axios from "axios";
+import { useState } from "react";
+import HashSpinner from "../HashSpinner/HashSpinner";
 
 const ProjectListItem = (prop) => {
   const navigate = useNavigate();
@@ -11,16 +14,49 @@ const ProjectListItem = (prop) => {
   const description = prop.projectDescription;
   const status = prop.projectStatus;
   const email = prop.projectEmail;
-  const algortihm = prop.projectAlgorithm;
+  const algorithm = prop.projectAlgorithm;
   const createdAt = prop.createdAt;
   const updatedAt = prop.updatedAt;
+  const developer = prop.developer;
+  const expert = prop.expert;
+  const [loading, setLoading] = useState(false);
 
   const deleteProject = async () => {
-    console.log("Deleting Project");
+    setLoading(true);
+    const url = `/project/${projectId}`;
+    const config = {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+    await axios
+      .delete(url, config)
+      .then((response) => {
+        setLoading(false);
+        window.location.reload();
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
   };
 
   const openProject = () => {
-    navigate("/project", { state: { id: projectId, role: role } });
+    navigate("/project", {
+      state: {
+        id: projectId,
+        role: role,
+        title,
+        description,
+        status,
+        email,
+        algorithm,
+        createdAt,
+        updatedAt,
+        developer,
+        expert
+      },
+    });
   };
 
   return (
@@ -53,7 +89,7 @@ const ProjectListItem = (prop) => {
               <i className="fa-solid fa-code-branch"></i>
               <label>Algorithm</label>
             </div>
-            <div className="ProjectValue">{algortihm.toUpperCase()}</div>
+            <div className="ProjectValue">{algorithm.toUpperCase()}</div>
           </div>
           <div className="rightProjectListItem">
             <div className="ProjectLabel">
@@ -81,14 +117,20 @@ const ProjectListItem = (prop) => {
               </button>
             </div>
             <div className="ProjectListItemControlElement">
-              <button
-                className="actionButton"
-                onClick={() => {
-                  deleteProject();
-                }}
-              >
-                Delete Project
-              </button>
+              {loading ? (
+                <HashSpinner size={30} />
+              ) : (
+                <>
+                  <button
+                    className="actionButton"
+                    onClick={() => {
+                      deleteProject();
+                    }}
+                  >
+                    Delete Project
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>

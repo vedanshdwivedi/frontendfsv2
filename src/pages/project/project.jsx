@@ -20,9 +20,17 @@ const Project = () => {
 
   const location = useLocation();
 
-  console.log(location.state);
   const projectId = _.get(location, "state.id", null);
   const role = _.get(location, "state.role", null);
+  const title = _.get(location, "state.title", null);
+  const description = _.get(location, "state.description", null);
+  const status = _.get(location, "state.status", null);
+  const email = _.get(location, "state.email", null);
+  const algorithm = _.get(location, "state.algorithm", null);
+  const createdAt = _.get(location, "state.createdAt", null);
+  const updatedAt = _.get(location, "state.updatedAt", null);
+  const expert = _.get(location, "state.expert", null);
+  const developer = _.get(location, "state.developer", null);
 
   return (
     <>
@@ -30,7 +38,18 @@ const Project = () => {
         <Navbar page="project" />
         <div className="projectContainer">
           {role === "USER" ? (
-            <UserProject id={projectId} />
+            <UserProject
+              id={projectId}
+              title={title}
+              description={description}
+              status={status}
+              email={email}
+              algorithm={algorithm}
+              createdAt={createdAt}
+              updatedAt={updatedAt}
+              developer={developer}
+              expert={expert}
+            />
           ) : role === "DEVELOPER" ? (
             <DeveloperProject id={projectId} />
           ) : role === "EXPERT" ? (

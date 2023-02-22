@@ -1,0 +1,49 @@
+.updateProjectForm{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.updateProjectFormElementInput > textarea {
+    resize: none;
+    padding: 10px;
+    background-color: aliceblue;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.updateProjectFormElement {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.updateProjectFormElementLabel{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.updateProjectFormElementInput > input{
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
+    border-radius: 10px;
+    border: none;
+    background-color: aliceblue;
+}
+
+
+.updateProjectButton{
+    padding: 10px;
+    border: 1px solid #3f5de1;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #3f5de1;
+    background-color: white;
+}
+
+.updateProjectButton:hover{
+    background-color: #3f5de1;
+    color: white;
+}
+
