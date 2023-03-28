@@ -92,3 +92,9 @@
   color: rgb(247, 69, 69);
   cursor: default;
 }
+
+.featureStore{
+  font-weight: 500;
+  font-size: 30px;
+  color: #d1d1d1;
+}

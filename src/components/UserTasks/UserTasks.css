@@ -1,0 +1,77 @@
+.taskTableContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.taskTableRefreshButton {
+  margin: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.taskTableSpan:hover {
+  color: #3f5de1;
+  cursor: pointer;
+}
+
+.taskTableIcon:hover {
+  color: #3f5de1;
+  cursor: pointer;
+}
+
+.toggleGraphButton {
+  border: 1px solid #3f5de1;
+  padding: 5px;
+  margin: 5px;
+  color: #3f5de1;
+  cursor: pointer;
+  background-color: white;
+}
+
+.toggleGraphButton {
+  background-color: #3f5de1;
+  color: white;
+}
+
+.fileDownloadButton {
+  color: #3f5de1;
+  background-color: white;
+  padding: 5px;
+  border: 1px solid #3f5de1;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.fileDownloadButton > a {
+  text-decoration: none;
+}
+
+.fileDownloadButton:hover > a {
+  text-decoration: none;
+  color: white;
+}
+
+.fileDownloadButton:hover {
+  background-color: #3f5de1;
+  color: white;
+}
+
+.outputContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.taskTriggerButton {
+  color: #3f5de1;
+  background-color: white;
+  padding: 7px;
+  border: 1px solid #3f5de1;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.taskTriggerButton:hover {
+  background-color: #3f5de1;
+  color: white;
+}

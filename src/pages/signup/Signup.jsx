@@ -62,6 +62,7 @@ const Signup = () => {
   return (
     <div className="SignupContainer">
       <div className="signupWrapper">
+        <h1 className="featureStore">Feature Store</h1>
         <h1 className="signupTitle">Enter Details to Sign Up</h1>
         <div className="signupForm">
           <div className="signupFormItem">

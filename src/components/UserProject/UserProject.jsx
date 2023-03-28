@@ -276,7 +276,7 @@ const UserProject = (prop) => {
             </>
           ) : drawerState["prediction"] ? (
             <>
-              <CreatePrediction />
+              <CreatePrediction projectId={projectId} />
             </>
           ) : drawerState["update"] ? (
             <>

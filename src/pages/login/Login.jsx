@@ -45,7 +45,7 @@ const Login = () => {
           localStorage.setItem("role", response.data.role);
           localStorage.setItem("email", response.data.email);
           localStorage.setItem("username", response.data.username);
-          localStorage.setItem("name", response.data.name)
+          localStorage.setItem("name", response.data.name);
           window.location = "/";
         }
       })
@@ -61,6 +61,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="loginWrapper">
+        <h1 className="featureStore">Feature Store</h1>
         <h1 className="loginTitle">Please enter your login and password!</h1>
         <div className="loginForm">
           <div className="loginFormItem">
@@ -117,7 +118,7 @@ const Login = () => {
             <i className="fa-brands fa-twitter"></i>
           </div>
           <div className="socialButtonItem">
-            <i className="fa-brands fa-google"></i>
+            <i className="fa-brands fa-linkedin"></i>
           </div>
         </div>
         <div className="signUp">
