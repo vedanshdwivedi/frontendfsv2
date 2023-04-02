@@ -7,6 +7,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Project from "./pages/project/project";
 import Signup from "./pages/signup/Signup";
+import Profile from "./pages/profile/Profile"
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/project" element={<Project />} />
         <Route path="/dev" element={<DevHome id={null} />} />
         <Route path="/expert" element={<ExpertHome id={null} />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

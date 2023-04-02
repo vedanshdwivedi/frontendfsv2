@@ -21,6 +21,9 @@ const Home = () => {
       navigate("/login");
     } else {
       setRole(localStorage.getItem("role"));
+      if (role === "DEVELOPER") {
+        navigate("/dev");
+      }
       fetchProjects();
     }
   }, []);

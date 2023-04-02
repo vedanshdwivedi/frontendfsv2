@@ -1,0 +1,22 @@
+.DevNavigatorContainer{
+    margin-bottom: 10px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    padding: 8px;
+    background-color: rgb(223, 226, 229);
+}
+
+.DevNavigatorWrapper{
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.DevNavigatorElement{
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+

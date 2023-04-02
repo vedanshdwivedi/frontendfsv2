@@ -23,6 +23,16 @@ const Login = () => {
     }
   }, []);
 
+  const handleRedirect = (role) => {
+    if (role === "USER") {
+      window.location = "/";
+    } else if (role === "DEVELOPER") {
+      window.location = "/dev";
+    } else {
+      window.location = "/";
+    }
+  };
+
   const handleLoginClick = async () => {
     setLoginErrors(null);
     setLoading(true);
@@ -46,7 +56,7 @@ const Login = () => {
           localStorage.setItem("email", response.data.email);
           localStorage.setItem("username", response.data.username);
           localStorage.setItem("name", response.data.name);
-          window.location = "/";
+          handleRedirect(response.data.role);
         }
       })
       .catch((error) => {

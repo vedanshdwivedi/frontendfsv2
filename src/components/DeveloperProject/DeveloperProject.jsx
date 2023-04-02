@@ -107,7 +107,9 @@ const DeveloperProject = (prop) => {
                 <div className="formElement">
                   <div className="formElementLabel">Update Project Status</div>
                   <select className="updateFromSelect">
-                    <option value="CREATED" selected>CREATED</option>
+                    <option value="CREATED" selected>
+                      CREATED
+                    </option>
                     <option value="CREATED">REJECTED</option>
                     <option value="CREATED">IN-PROGRESS</option>
                   </select>
@@ -142,24 +144,7 @@ const DeveloperProject = (prop) => {
             </p>
           </div>
           <div className="UserProjectCommentArea">
-              <ProjectComments id={projectId} role={"DEVELOPER"} />
-            </div>
-          <div className="expertChatArea">
-            <div
-              className="expertChatAreaBubble"
-              onClick={() => {
-                setShowExpertChatScreen(!showExpertChatScreen);
-              }}
-            >
-              Chat with Domain Expert
-            </div>
-            {showExpertChatScreen ? (
-              <div className="expertChatAreaContainer">
-                <Chat id={projectId} role={"DEVELOPER"} />
-              </div>
-            ) : (
-              ""
-            )}
+            <ProjectComments id={projectId} role={"DEVELOPER"} />
           </div>
         </div>
         <div className="rightDevProjectArea">

@@ -2,10 +2,14 @@ import "./Navbar.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const _ = require("lodash");
 
 const Navbar = (prop) => {
   const navigate = useNavigate();
-  const showCreateButton = prop.page === "home";
+  const role = _.get(localStorage, "role");
+  const showCreateButton = prop.page === "home" && role === "USER";
+  console.log(showCreateButton);
+  console.log("SCB");
 
   const handleNavigate = (url_path) => {
     navigate(url_path);
@@ -50,6 +54,25 @@ const Navbar = (prop) => {
                 Create Project
               </button>
             </div>
+          )}
+          {role != null ? (
+            <>
+              <div className="navbarItem">
+                <div className="logout">
+                  <i className="fa-regular fa-user"></i>
+                  <button
+                    className="logoutButton"
+                    onClick={() => {
+                      handleNavigate("/profile");
+                    }}
+                  >
+                    Profile
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <></>
           )}
           <div className="navbarItem">
             <div className="logout">
