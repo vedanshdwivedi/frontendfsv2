@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import HashSpinner from "../HashSpinner/HashSpinner";
 import { formatDateString } from "../../utility";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 const ActivityLogs = (prop) => {
   const projectId = prop.id;
@@ -20,6 +21,7 @@ const ActivityLogs = (prop) => {
     const url = `/project/ackLogs/${projectId}`;
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -33,9 +35,8 @@ const ActivityLogs = (prop) => {
       })
       .catch((error) => {
         setLoading(false);
-        if (error.response.status == 401) {
-          localStorage.clear();
-          window.location = "/";
+        if (error.response.status === 401) {
+          // window.location = "/";
         }
       });
   };
@@ -48,20 +49,22 @@ const ActivityLogs = (prop) => {
           {loading ? (
             <HashSpinner size={20} />
           ) : (
-            <>
-              {rows.map((row) => {
-                return (
-                  <>
-                    <div className="activityLogItem" key={row._id}>
-                      <div className="activityLogContent">{row.action}</div>
-                      <div className="activityLogTimestamp">
-                        {formatDateString(row.createdAt)}
+            <ScrollToBottom>
+              <>
+                {rows.map((row) => {
+                  return (
+                    <>
+                      <div className="activityLogItem" key={row._id}>
+                        <div className="activityLogContent">{row.action}</div>
+                        <div className="activityLogTimestamp">
+                          {formatDateString(row.createdAt)}
+                        </div>
                       </div>
-                    </div>
-                  </>
-                );
-              })}
-            </>
+                    </>
+                  );
+                })}
+              </>
+            </ScrollToBottom>
           )}
         </div>
       </div>

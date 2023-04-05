@@ -23,6 +23,7 @@ const ProjectComments = (prop) => {
     const url = `/comment/${projectId}`;
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -44,6 +45,7 @@ const ProjectComments = (prop) => {
     const url = `/comment/`;
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -121,7 +123,7 @@ const ProjectComments = (prop) => {
                 >
                   Post Comment
                 </button>
-                {role === "EXPERT" ? (
+                {role === "DEVELOPER" ? (
                   <button className="ProjectCommentTypingAreaButton">
                     Comment and Review Project
                   </button>

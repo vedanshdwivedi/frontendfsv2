@@ -34,6 +34,7 @@ const Signup = () => {
     };
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         "Content-Type": "application/json; charset=utf-8",
       },
     };

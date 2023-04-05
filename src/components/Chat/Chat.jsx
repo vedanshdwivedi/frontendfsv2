@@ -1,7 +1,7 @@
 import "./Chat.css";
 import React from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { useLocation } from "react-router-dom";
+import { json, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -19,11 +19,24 @@ const Chat = (prop) => {
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
 
+  console.log(`[Chat][receiver] : ${JSON.stringify(prop)}`);
+
   const fetchMessageByThreads = async () => {
+    console.log(
+      `[fetchMessageByThreads] receiver : ${JSON.stringify(
+        receiver
+      )}, threadId : ${JSON.stringify(threadId)}, projectId : ${JSON.stringify(
+        projectId
+      )}`
+    );
     setLoading(false);
+    if (threadId === null) {
+      return;
+    }
     const url = `/message/${threadId}`;
     const config = {
       headers: {
+        "Cache-Control": "no-cache",
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -52,6 +65,7 @@ const Chat = (prop) => {
     const url = `/message/send`;
     const config = {
       headers: {
+        "Cache-Control": "no-cache",
         Authorization: localStorage.getItem("token"),
       },
     };

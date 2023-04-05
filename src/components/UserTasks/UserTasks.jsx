@@ -19,6 +19,7 @@ const UserTasks = (prop) => {
     };
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -126,6 +127,7 @@ const UserTasks = (prop) => {
     const url = `/tasks/${projectId}?check=${Date.now().toString()}`;
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         Authorization: localStorage.getItem("token"),
       },
     };

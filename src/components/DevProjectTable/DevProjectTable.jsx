@@ -15,8 +15,32 @@ const DevProjectTable = (prop) => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const handleProjectPageMigration = (projectId) => {
-    navigate("/project", { state: { id: projectId, role: "DEVELOPER" } });
+  const handleProjectPageMigration = (
+    projectId,
+    projectTitle,
+    projectDescription,
+    projectStatus,
+    projectEmail,
+    projectAlgorithm,
+    createdAt,
+    updatedAt,
+    uid
+  ) => {
+    navigate("/project", {
+      state: {
+        id: projectId,
+        role: "DEVELOPER",
+        title: projectTitle,
+        description: projectDescription,
+        status: projectStatus,
+        email: projectEmail,
+        algorithm: projectAlgorithm,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
+        developer: localStorage.getItem("username"),
+        uid: uid,
+      },
+    });
   };
 
   const fetchProjects = async () => {
@@ -28,6 +52,7 @@ const DevProjectTable = (prop) => {
     const url = "/project/dev/projectList";
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -52,25 +77,31 @@ const DevProjectTable = (prop) => {
   }, [filterState]);
 
   const columns = [
-    { field: "pid", headerName: "Project ID", width: 80 },
-    { field: "title", headerName: "Project Name", width: 150 },
+    { field: "pid", headerName: "#id", width: 30 },
+    { field: "title", headerName: "Project Name", width: 270 },
     {
       field: "status",
       headerName: "Task Status",
       description: "Project's Current Status",
-      width: 110,
+      width: 120,
+    },
+    {
+      field: "algorithm",
+      headerName: "Algorithm",
+      description: "Project Algorithm",
+      width: 120,
     },
     {
       field: "createdAt",
       headerName: "Created Date",
       description: "When project was created",
-      width: 180,
+      width: 160,
     },
     {
       field: "updatedAt",
       headerName: "Last Updated Date",
       description: "When project was last updated",
-      width: 180,
+      width: 160,
     },
     {
       headerName: "Project Link",
@@ -82,7 +113,17 @@ const DevProjectTable = (prop) => {
             <div
               className="devProjectLink"
               onClick={() => {
-                handleProjectPageMigration(params.row.pid);
+                handleProjectPageMigration(
+                  params.row.pid,
+                  params.row.title,
+                  params.row.description,
+                  params.row.status,
+                  params.row.email,
+                  params.row.algorithm,
+                  params.row.createdAt,
+                  params.row.updatedAt,
+                  params.row.uid
+                );
               }}
             >
               <i className="fa-regular fa-folder-open"></i>

@@ -13,6 +13,7 @@ import { Drawer } from "antd";
 import UpdateProject from "../updateProject/updateProject";
 import CreatePrediction from "../createPrediction/CreatePrediction";
 import UpdateDataset from "../updateDataset/UpdateDataset";
+import Footer from "../footer/Footer";
 
 const UserProject = (prop) => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const UserProject = (prop) => {
     const url = `/project/dataset/${projectId}`;
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -55,6 +57,7 @@ const UserProject = (prop) => {
     const url = `/project/${projectId}/thread`;
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -68,7 +71,7 @@ const UserProject = (prop) => {
       })
       .catch((error) => {
         setFetchingThreadId(false);
-        window.location = "/";
+        // window.location = "/";
       });
   };
 
@@ -88,7 +91,6 @@ const UserProject = (prop) => {
   const algorithm = prop.algorithm;
   const createdAt = prop.createdAt;
   const updatedAt = prop.updatedAt;
-  const expert = prop.expert;
   const developer = prop.developer;
   return (
     <>
@@ -112,10 +114,6 @@ const UserProject = (prop) => {
               <div className="projectOwnerInfoData">
                 <div className="projectOwnerInfoKey">Developer</div>
                 <div className="projectOwnerInfoValue">{developer}</div>
-              </div>
-              <div className="projectOwnerInfoData">
-                <div className="projectOwnerInfoKey">Domain Expert</div>
-                <div className="projectOwnerInfoValue">{expert}</div>
               </div>
             </div>
             <div className="projectControlArea">

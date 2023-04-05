@@ -4,7 +4,6 @@ import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import UserProject from "../../components/UserProject/UserProject";
 import DeveloperProject from "../../components/DeveloperProject/DeveloperProject";
-import ExpertProject from "../../components/ExpertProject/ExpertProject";
 import "./project.css";
 const _ = require("lodash");
 
@@ -29,8 +28,8 @@ const Project = () => {
   const algorithm = _.get(location, "state.algorithm", null);
   const createdAt = _.get(location, "state.createdAt", null);
   const updatedAt = _.get(location, "state.updatedAt", null);
-  const expert = _.get(location, "state.expert", null);
   const developer = _.get(location, "state.developer", null);
+  const uid = _.get(location, "state.uid", null);
 
   return (
     <>
@@ -48,18 +47,26 @@ const Project = () => {
               createdAt={createdAt}
               updatedAt={updatedAt}
               developer={developer}
-              expert={expert}
             />
           ) : role === "DEVELOPER" ? (
-            <DeveloperProject id={projectId} />
-          ) : role === "EXPERT" ? (
-            <ExpertProject id={projectId} />
+            <DeveloperProject
+              id={projectId}
+              title={title}
+              description={description}
+              status={status}
+              email={email}
+              algorithm={algorithm}
+              createdAt={createdAt}
+              updatedAt={updatedAt}
+              developer={developer}
+              uid={uid}
+            />
           ) : (
             <h1>You are not supposed to be here</h1>
           )}
         </div>
-        {role !== "DEVELOPER" ? <Footer /> : ""}
-        {/* <Footer /> */}
+        {/* {role !== "DEVELOPER" ? <Footer /> : ""} */}
+        <Footer />
       </div>
     </>
   );

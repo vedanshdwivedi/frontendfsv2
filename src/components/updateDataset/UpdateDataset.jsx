@@ -13,6 +13,7 @@ const UpdateDataset = (prop) => {
     const url = `/project/${projectId}/update/dataset`;
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         "content-type": "multipart/form-data",
         Authorization: localStorage.getItem("token"),
       },

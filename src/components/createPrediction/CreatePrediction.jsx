@@ -15,6 +15,7 @@ const CreatePrediction = (prop) => {
     formdata.append("file", file);
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         "content-type": "multipart/form-data",
         Authorization: localStorage.getItem("token"),
       },

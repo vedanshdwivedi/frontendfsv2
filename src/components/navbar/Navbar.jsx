@@ -22,6 +22,7 @@ const Navbar = (prop) => {
     };
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         Authorization: localStorage.getItem("token"),
       },
     };

@@ -49,6 +49,7 @@ const CreateProject = () => {
     const url = "/project";
     const config = {
       headers: {
+        "Cache-Control": 'no-cache',
         "content-type": "multipart/form-data",
         Authorization: localStorage.getItem("token"),
       },
