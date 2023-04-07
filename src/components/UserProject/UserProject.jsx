@@ -35,7 +35,7 @@ const UserProject = (prop) => {
     const url = `/project/dataset/${projectId}`;
     const config = {
       headers: {
-        "Cache-Control": 'no-cache',
+        "Cache-Control": "no-cache",
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -57,7 +57,7 @@ const UserProject = (prop) => {
     const url = `/project/${projectId}/thread`;
     const config = {
       headers: {
-        "Cache-Control": 'no-cache',
+        "Cache-Control": "no-cache",
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -67,11 +67,12 @@ const UserProject = (prop) => {
         setFetchingThreadId(false);
         if (response.status === 200) {
           setThreadId(response.data.data._id);
+          console.log(response);
         }
       })
       .catch((error) => {
         setFetchingThreadId(false);
-        // window.location = "/";
+        window.location = "/";
       });
   };
 
@@ -244,7 +245,7 @@ const UserProject = (prop) => {
               <ActivityLogs id={projectId} />
             </div>
             <div className="chatContainer">
-              {fetchingThreadId ? (
+              {fetchingThreadId && threadId === "" ? (
                 <>
                   <HashSpinner size={30} />
                 </>

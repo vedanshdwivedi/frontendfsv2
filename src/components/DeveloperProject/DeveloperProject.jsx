@@ -23,7 +23,8 @@ const DeveloperProject = (prop) => {
 
   const [downloadLink, setDownloadLink] = useState("#");
   const [fetchingDownloadLink, setFetchingDownloadLink] = useState(false);
-  const [stateList, fetchingStateList] = useState([]);
+  const [stateList, setStateList] = useState([]);
+  const [fetchingStateList, setFetchingStateList] = useState(true);
   const [fetchingThreadId, setFetchingThreadId] = useState(false);
   const [threadId, setThreadId] = useState("");
   const [receiver, setReceiver] = useState("");
@@ -40,7 +41,7 @@ const DeveloperProject = (prop) => {
     const url = `/project/dataset/${projectId}`;
     const config = {
       headers: {
-        "Cache-Control": 'no-cache',
+        "Cache-Control": "no-cache",
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -62,7 +63,7 @@ const DeveloperProject = (prop) => {
     const url = `auth/user?uid=${uid}`;
     const config = {
       headers: {
-        "Cache-Control": 'no-cache',
+        "Cache-Control": "no-cache",
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -87,7 +88,7 @@ const DeveloperProject = (prop) => {
     const url = `/project/${projectId}/thread`;
     const config = {
       headers: {
-        "Cache-Control": 'no-cache',
+        "Cache-Control": "no-cache",
         Authorization: localStorage.getItem("token"),
       },
     };
@@ -107,12 +108,29 @@ const DeveloperProject = (prop) => {
   };
 
   const fetchStateList = async () => {
-
-  }
+    const url = "/project/nextState/" + status;
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Cache-Control": "no-cache",
+      },
+    };
+    setFetchingStateList(true);
+    await axios
+      .get(url, config)
+      .then((response) => {
+        setFetchingStateList(false);
+        setStateList(response.data.data);
+      })
+      .catch((err) => {
+        setFetchingStateList(false);
+      });
+  };
 
   useEffect(() => {
     fetchProjectDatasetDownloadLink();
     fetchThreadId();
+    fetchStateList();
   }, []);
 
   return (
@@ -205,21 +223,36 @@ const DeveloperProject = (prop) => {
                   </form>
                 </div>
                 <div className="UpdateProjectStatusForm">
-                  <div className="formElement">
-                    <div className="formElementLabel">
-                      Update Project Status
-                    </div>
-                    <select className="updateFromSelect">
-                      <option value={status} selected>
-                        {status}
-                      </option>
-                      <option value="CREATED">REJECTED</option>
-                      <option value="CREATED">IN-PROGRESS</option>
-                    </select>
-                  </div>
-                  <button className="uploadTransformationFileButton">
-                    Update Status
-                  </button>
+                  {fetchingStateList ? (
+                    <>
+                      <HashSpinner size={30} />
+                    </>
+                  ) : (
+                    <>
+                      <div className="formElement">
+                        <div className="formElementLabel">
+                          Update Project Status
+                        </div>
+                        <select className="updateFromSelect">
+                          <option value={status} selected>
+                            {status.replace("_", "-")}
+                          </option>
+                          {stateList.map((obj) => {
+                            return (
+                              <>
+                                <option value={obj}>
+                                  {obj.replace("_", "-")}
+                                </option>
+                              </>
+                            );
+                          })}
+                        </select>
+                      </div>
+                      <button className="uploadTransformationFileButton">
+                        Update Status
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -240,7 +273,7 @@ const DeveloperProject = (prop) => {
               <ActivityLogs id={projectId} />
             </div>
             <div className="devChatArea">
-              {fetchingThreadId ? (
+              {fetchingThreadId && threadId === "" ? (
                 <>
                   <HashSpinner size={30} />
                 </>

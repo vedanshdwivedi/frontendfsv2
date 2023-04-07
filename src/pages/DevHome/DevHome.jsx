@@ -83,11 +83,11 @@ const DevHome = (prop) => {
           <div className="devHomeWrapper">
             {selectedTab === "assigned" ? (
               <>
-                <DevProjectTable id={devId} tab={"IN PROGRESS"} />
+                <DevProjectTable id={devId} tab={"IN_PROGRESS"} />
               </>
             ) : selectedTab === "queued" ? (
               <>
-                <DevProjectTable id={devId} tab={"ON HOLD"} />
+                <DevProjectTable id={devId} tab={"ON_HOLD"} />
               </>
             ) : selectedTab === "completed" ? (
               <>

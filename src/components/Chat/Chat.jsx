@@ -4,6 +4,7 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import { json, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { io } from "socket.io-client";
 import axios from "axios";
 import { formatDateString } from "../../utility";
 import HashSpinner from "../HashSpinner/HashSpinner";
@@ -18,8 +19,7 @@ const Chat = (prop) => {
   const [rows, setRows] = useState([]);
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
-
-  console.log(`[Chat][receiver] : ${JSON.stringify(prop)}`);
+  const [socket, setSocket] = useState(null);
 
   const fetchMessageByThreads = async () => {
     console.log(
@@ -33,7 +33,7 @@ const Chat = (prop) => {
     if (threadId === null) {
       return;
     }
-    const url = `/message/${threadId}`;
+    const url = `/message/thread/${threadId}`;
     const config = {
       headers: {
         "Cache-Control": "no-cache",
@@ -60,6 +60,7 @@ const Chat = (prop) => {
       content: message,
       projectId: projectId,
       receiver: receiver,
+      threadId: threadId,
     };
     setMessage("");
     const url = `/message/send`;
@@ -69,22 +70,58 @@ const Chat = (prop) => {
         Authorization: localStorage.getItem("token"),
       },
     };
-    await axios
-      .post(url, data, config)
-      .then((response) => {
-        setSending(false);
-        if (response.status === 200 || response.status === 201) {
-          fetchMessageByThreads();
-        }
-      })
-      .catch((error) => {
-        setSending(false);
-      });
+    if (socket) {
+      console.log(1);
+      socket.emit("send message", data);
+      setSending(false);
+    } else {
+      console.log(2);
+      setSending(false);
+    }
+    // await axios
+    //   .post(url, data, config)
+    //   .then((response) => {
+    //     setSending(false);
+    //     if (response.status === 200 || response.status === 201) {
+    //       fetchMessageByThreads();
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     setSending(false);
+    //   });
   };
 
   useEffect(() => {
     fetchMessageByThreads();
+    const newSocket = io("http://localhost:5500", {
+      debug: true,
+      query: {
+        threadId,
+      },
+    });
+    setSocket(newSocket);
+    return () => newSocket.close();
   }, []);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("new message", (msg) => {
+        setRows((prevRows) => [...prevRows, msg]);
+        console.log(rows);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("connect_error", (error) => {
+        console.log(`Socket.io connection error: ${error}`);
+      });
+      socket.on("reconnect", () => {
+        console.log("Socket.io reconnected");
+      });
+    }
+  }, [socket]);
 
   return (
     <>
