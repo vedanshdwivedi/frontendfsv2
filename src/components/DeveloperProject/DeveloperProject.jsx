@@ -19,11 +19,12 @@ const DeveloperProject = (prop) => {
   const algorithm = prop.algorithm;
   const createdAt = prop.createdAt;
   const updatedAt = prop.updatedAt;
-  const developer = prop.developer;
 
   const [downloadLink, setDownloadLink] = useState("#");
   const [fetchingDownloadLink, setFetchingDownloadLink] = useState(false);
   const [stateList, setStateList] = useState([]);
+  const [newState, setNewState] = useState("");
+  const [updatingState, setUpdatingState] = useState(false);
   const [fetchingStateList, setFetchingStateList] = useState(true);
   const [fetchingThreadId, setFetchingThreadId] = useState(false);
   const [threadId, setThreadId] = useState("");
@@ -33,6 +34,35 @@ const DeveloperProject = (prop) => {
 
   const handleHomeClick = (url) => {
     navigate(url);
+  };
+
+  const updateProjectStatus = async () => {
+    if (status === newState) {
+      return;
+    }
+    setUpdatingState(true);
+    const url = "project/status";
+    const data = {
+      projectId: projectId,
+      state: newState,
+    };
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+    await axios
+      .post(url, data, config)
+      .then((response) => {
+        setUpdatingState(false);
+        if (response.status === 200) {
+          fetchStateList();
+        }
+      })
+      .catch((err) => {
+        setUpdatingState(false);
+        console.log(`Error in updating project state : ${JSON.stringify(err)}`);
+      });
   };
 
   const fetchProjectDatasetDownloadLink = async () => {
@@ -233,7 +263,12 @@ const DeveloperProject = (prop) => {
                         <div className="formElementLabel">
                           Update Project Status
                         </div>
-                        <select className="updateFromSelect">
+                        <select
+                          className="updateFromSelect"
+                          onChange={(e) => {
+                            setNewState(e.target.value);
+                          }}
+                        >
                           <option value={status} selected>
                             {status.replace("_", "-")}
                           </option>
@@ -248,9 +283,22 @@ const DeveloperProject = (prop) => {
                           })}
                         </select>
                       </div>
-                      <button className="uploadTransformationFileButton">
-                        Update Status
-                      </button>
+                      {updatingState ? (
+                        <>
+                          <HashSpinner size={20} />
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            className="uploadTransformationFileButton"
+                            onClick={() => {
+                              updateProjectStatus();
+                            }}
+                          >
+                            Update Status
+                          </button>
+                        </>
+                      )}
                     </>
                   )}
                 </div>
