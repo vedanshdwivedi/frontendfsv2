@@ -93,7 +93,7 @@ const Chat = (prop) => {
 
   useEffect(() => {
     fetchMessageByThreads();
-    const newSocket = io("http://localhost:5500", {
+    const newSocket = io("https://backend-wj2i.onrender.com/", {
       debug: true,
       query: {
         threadId,
